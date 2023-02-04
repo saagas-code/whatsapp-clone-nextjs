@@ -14,9 +14,12 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "emoji-picker-react": "^4.4.7",
+    "install": "^0.13.0",
     "next": "13.1.6",
+    "npm": "^9.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
     "typescript": "4.9.5"
   },
   "devDependencies": {

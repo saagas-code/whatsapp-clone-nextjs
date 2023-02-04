@@ -8,3 +8,8 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: #D2DBDC;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
