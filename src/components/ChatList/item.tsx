@@ -1,11 +1,18 @@
+import { Chat } from "@src/pages"
+
 const avatar = "https://www.w3schools.com/howto/img_avatar.png"
 
-export default function ChatItem() {
+interface Props {
+  chat: Chat
+  active?: boolean
+}
+
+export default function ChatItem({chat, active}: Props) {
   return (
-    <div className="flex cursor-pointer items-center h-[70px] ml-[15px] hover:bg-[#F5F5F5]">
+    <div className={`flex cursor-pointer items-center h-[70px] ml-[15px] hover:bg-[#F5F5F5] ${active ? 'bg-[#EBEBEB]' : ''}`}>
       <img 
-        src={avatar} 
-        alt="" 
+        src={chat.avatar} 
+        alt="chat avatar" 
         className="w-[50px] h-[50px] rounded-full mr-[15px]" 
       />
 
@@ -13,10 +20,10 @@ export default function ChatItem() {
         
         <div className="flex justify-between items-center w-full">
           <div className="text-[17px] text-[#000]">
-            Matheus Almeida
+            {chat.name}
           </div>
           <div className="text-[12px] text-[#999]">
-            19:00
+            {chat.lastMsgTime}
           </div>
         </div>
 
@@ -25,7 +32,7 @@ export default function ChatItem() {
             <p 
               className="truncate"
             >
-              Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?Opa, Tudo bem?
+              {chat.lastMsg}
             </p>
           </div>
         </div>
