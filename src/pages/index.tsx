@@ -1,45 +1,35 @@
-import { MdDonutLarge } from 'react-icons/md';
-import { BsFillChatLeftTextFill } from 'react-icons/bs';
-import { FiMoreVertical } from 'react-icons/fi';
-import { AiOutlineSearch } from 'react-icons/ai';
+
+import { useState } from 'react';
+import FriendList from '@src/components/FriendList';
+import Header from '@src/components/Header';
+import Search from '@src/components/Search';
+import Chat from '@src/components/ChatIntro';
+import ChatIntro from '@src/components/ChatIntro';
 
 
-const avatar = "https://www.w3schools.com/howto/img_avatar.png"
 
 export default function Home() {
+  const [chatList, setChatList] = useState([{}, {}, {},{}, {}, {},{}, {}, {},{}, {}, {},{}, {}, {},])
+  const [activeChat, setActiveChat] = useState({});
+
   return (
     <div className="flex h-[100vh] bg-[#EDEDED]">
+
+      {/* LEFT SIDE */}
       <div className="w-[35%] max-w-[415px] flex flex-col border-r-2 border-[#DDD]">
         
-        <header className="h-[60px] py-0 px-[15px] flex justify-between items-center">
-          <img src={avatar} alt="" className="w-[40px] h-[40px] cursor-pointer rounded-full" />
-          <div className="flex">
-            <div className="text-[#919191] flex gap-4 items-center align-middle">
-              <MdDonutLarge className="h-[25px] w-[25px]" />
-              <BsFillChatLeftTextFill className="h-[25px] w-[25px]" />
-              <FiMoreVertical className="h-[25px] w-[25px]" />
-            </div>
-          </div>
-        </header>
+        <Header />
 
+        <Search />
 
-        <div className="bg-[#F6F6F6] border-b-[1px] border-[#EEE] py-[5px] px-[15px]"> 
-          <div className="flex bg-[#FFF] h-[40px] rounded-[20px] items-center px-[10px]"> 
-            <AiOutlineSearch className="h-[25px] w-[25px] text-[#919191]" />
-            <input 
-              type="search" 
-              placeholder={"Procurar ou comecar uma nova conversa"} 
-              className="flex-1 border-0 outline-0 bg-transparent ml-[10px]"
-            />
-          </div>
-        </div>
+        <FriendList chatList={chatList} />
 
-        <div className="">
-          chatlist
-        </div>
       </div>
-      <div className="">
-        ...
+
+
+      {/* RIGHT SIDE */}
+      <div className="flex-1">
+        <ChatIntro />
       </div>
     </div>
   )
