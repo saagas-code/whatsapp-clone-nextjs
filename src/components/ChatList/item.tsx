@@ -9,7 +9,7 @@ interface Props {
 
 export default function ChatItem({chat, active}: Props) {
   return (
-    <div className={`flex cursor-pointer items-center h-[70px] ml-[15px] hover:bg-[#F5F5F5] ${active ? 'bg-[#EBEBEB]' : ''}`}>
+    <div className={`flex cursor-pointer items-center h-[70px] pl-[15px] hover:bg-[#F5F5F5] ${active ? 'bg-[#EBEBEB]' : ''}`}>
       <img 
         src={chat.avatar} 
         alt="chat avatar" 
