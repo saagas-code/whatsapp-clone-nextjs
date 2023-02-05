@@ -7,9 +7,10 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { BsFillMicFill } from 'react-icons/bs';
 
 
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useSpeech } from '@src/hooks/useSpeech';
 
 const Picker = dynamic(
   () => {
@@ -24,45 +25,28 @@ interface Props {
 }
 
 export default function ChatWindow({}: Props) {
-
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
-
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
-
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [text, setText] = useState('');
 
+  const {
+    browserSupportsSpeechRecognition, listening,
+    resetTranscript, transcript, SpeechRecognition
+  } = useSpeech({text, setText})
 
-  const handleEmojiClick = (e: any) => {
-    setText(text + e.emoji)
+  if (!browserSupportsSpeechRecognition) {
+    alert("AVISO ! Seu navegador não suporta o uso do microfone !")
   }
+
+
 
   const handleSend = () => {
     
   }
 
-  // set transcript to text when speech finish
-  useEffect(() => {
-    if(!listening) {
-      setText(text + transcript)
-      resetTranscript()
-    }
-  }, [listening])
+  const handleEmojiClick = (e: any) => {
+    setText(text + e.emoji)
+  }
 
-  // abort speech when text change
-  useEffect(() => {
-    if(listening) {
-      SpeechRecognition.abortListening()
-    }
-  }, [text])
-  
   const handleMic = async () => {
     if(listening) {
       SpeechRecognition.abortListening()
