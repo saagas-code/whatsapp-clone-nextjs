@@ -5,12 +5,10 @@ import { BsEmojiSmile } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { AiOutlineSend } from 'react-icons/ai';
 import { BsFillMicFill } from 'react-icons/bs';
-
-
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useSpeech } from '@src/hooks/useSpeech';
+import { Messages } from '../Messages';
 
 const Picker = dynamic(
   () => {
@@ -27,16 +25,37 @@ interface Props {
 export default function ChatWindow({}: Props) {
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [text, setText] = useState('');
+  const [list, setList] = useState([
+    {author: '1', body: 'alow1'}, 
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+    {author: '2', body: 'alow2'},
+  ])
 
   const {
     browserSupportsSpeechRecognition, listening,
-    resetTranscript, transcript, SpeechRecognition
+    SpeechRecognition
   } = useSpeech({text, setText})
 
   if (!browserSupportsSpeechRecognition) {
     alert("AVISO ! Seu navegador não suporta o uso do microfone !")
   }
 
+  
+  //controll the scroll
+
+  
+  
 
 
   const handleSend = () => {
@@ -76,9 +95,7 @@ export default function ChatWindow({}: Props) {
       </div>
 
 
-      <div className="flex-1 overflow-y-auto bg-[#E5DDD5] bg-cover bg-size bg-top bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]">
-        
-      </div>
+      <Messages list={list} />
 
       {/* Emoji Picker Area */}
       <div 
