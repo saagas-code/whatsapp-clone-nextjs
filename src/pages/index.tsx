@@ -5,8 +5,7 @@ import Header from '@src/components/Header';
 import Search from '@src/components/Search';
 import ChatIntro from '@src/components/ChatIntro';
 import ChatWindow from '@src/components/ChatWindow';
-const avatar = "https://www.w3schools.com/howto/img_avatar.png"
-
+import { NewChat } from '@src/components/NewChat';
 
 const list = [
   {
@@ -45,14 +44,16 @@ export interface Chat {
 export default function Home() {
   const [chatList, setChatList] = useState<Chat[]>(list)
   const [activeChat, setActiveChat] = useState<Chat>();
+  const [showNewChat, setShowNewChat] = useState(true);
 
   return (
     <div className="flex h-[100vh] bg-[#EDEDED]">
 
       {/* LEFT SIDE */}
       <div className="w-[35%] max-w-[415px] flex flex-col border-r-2 border-[#DDD]">
+        <NewChat show={showNewChat} setShow={setShowNewChat} />
         
-        <Header />
+        <Header setShowNewChat={setShowNewChat} />
 
         <Search />
 
@@ -71,6 +72,8 @@ export default function Home() {
           <ChatIntro />
         }
       </div>
+
+      
     </div>
   )
 }
