@@ -71,7 +71,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
 
       api.defaults.headers['Authorization'] = `Bearer ${data.token}`
 
-      router.push("/home")
+      router.push("/")
       return
     } catch (err: any) {
       console.log(err.response.data)

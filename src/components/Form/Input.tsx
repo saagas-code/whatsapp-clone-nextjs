@@ -1,5 +1,4 @@
 import { forwardRef, ForwardRefRenderFunction } from 'react'
-import {UseFormRegister, FieldValues } from 'react-hook-form'
 import { FieldError } from 'react-hook-form/dist/types'
 
 type Props = {
@@ -23,8 +22,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = ({name, typ
           placeholder={placeholder} 
           ref={ref}
           {...register}
-          className={`rounded-[8px] bg-gray-900 p-2 border border-transparent 
-          focus:border-pink-600 mb-2  hover:bg-gray-900 transition-all 
+          className={`rounded-[8px] p-2 border border-transparent 
+          focus:border-pink-600 mb-2   transition-all 
             duration-500 ease-in-out ${error ? '!border-red-500' : ''}`}
         />
         <span className="text-sm text-red-400">
