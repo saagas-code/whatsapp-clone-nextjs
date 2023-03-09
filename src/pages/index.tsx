@@ -6,6 +6,10 @@ import Search from '@src/components/Search';
 import ChatIntro from '@src/components/ChatIntro';
 import ChatWindow from '@src/components/ChatWindow';
 import { NewChat } from '@src/components/NewChat';
+import { GetServerSideProps } from 'next';
+import { withSSRAuth } from '@src/utils/withSSRGuest';
+import { setupAPIClient } from '@src/services/api';
+
 
 const list = [
   {
@@ -41,11 +45,13 @@ export interface Chat {
 
 
 
+
+
 export default function Home() {
   const [chatList, setChatList] = useState<Chat[]>(list)
   const [activeChat, setActiveChat] = useState<Chat>();
   const [showNewChat, setShowNewChat] = useState(true);
-
+  
   return (
     <div className="flex h-[100vh] bg-[#EDEDED]">
 
@@ -72,8 +78,12 @@ export default function Home() {
           <ChatIntro />
         }
       </div>
-
-      
     </div>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})
