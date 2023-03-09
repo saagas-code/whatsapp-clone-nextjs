@@ -21,11 +21,18 @@ export default function SignIn() {
     resolver: yupResolver(signInFormSchema)
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [wrongData, setWrongData] = useState(false)
  
   const handleSignIn = async (data: SignInFormData) => {
+    setWrongData(false)
     setIsLoading(true)
     console.log("teste")
-    signIn(data)
+  
+    const result = await signIn(data)
+    if(!result) {
+      setWrongData(true)
+    }
+    console.log(result)
     setIsLoading(false)
   }
   
@@ -42,13 +49,22 @@ export default function SignIn() {
         <div >
           <form onSubmit={handleSubmit(handleSignIn)}>
             <Input error={errors.number} register={register("number")} placeholder="Número" name="number" type="text"/>
-            <Input error={errors.number} register={register("password")} placeholder="Senha" name="password" type="password"/>
+            <Input error={errors.password} register={register("password")} placeholder="Senha" name="password" type="password"/>
+          
+          {wrongData &&
+            <div className="text-red-500">
+              Email/Senha inválido
+            </div>
+          }
+          
           <button type="submit"
               className={"bg-pink-500 w-full text-white p-1 hover:opacity-80"}
             >
             Logar
           </button>
           </form>
+
+          
 
           <span onClick={() => router.push("/auth/register")} className={"text-bold hover:cursor-pointer text-pink-500 hover:opacity-80"}>
             Criar uma conta

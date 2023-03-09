@@ -20,10 +20,17 @@ interface SignInCredentials {
   password: string;
 }
 
+interface SignUpCredentials {
+  number: string;
+  name: string;
+  password: string;
+}
+
 interface AuthProviderContextProps {
   user: User | undefined;
   signOut(): Promise<void>
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn(credentials: SignInCredentials): Promise<boolean>;
+  signUp(data: SignUpCredentials): Promise<boolean>;
   isAuthenticated: boolean;
 }
 
@@ -58,7 +65,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     router.push("/auth/login")
   }
 
-  async function signIn({number, password}: SignInCredentials) {
+  async function signIn({number, password}: SignInCredentials): Promise<boolean> {
     try {
       const {data} = await api.post("auth/login", {
         number, password
@@ -72,14 +79,37 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
       api.defaults.headers['Authorization'] = `Bearer ${data.token}`
 
       router.push("/")
-      return
+      return true
     } catch (err: any) {
       console.log(err.response.data)
+      return false
     }
   }
 
+  async function signUp({number, name, password}: SignUpCredentials): Promise<boolean> {
+    
+    try {
+      const data = await api.post("/users", {
+        number, name, password
+      })
+      alert("Conta criada com sucesso !")
+      
+      signIn({number, password})
+
+      return true
+
+    } catch (err: any) {
+      console.log("err.response.data")
+      return false
+    }
+
+    
+    
+    return false
+  }
+
   return (
-    <AuthContext.Provider value={{signIn, signOut, isAuthenticated, user}}>
+    <AuthContext.Provider value={{signIn, signOut, isAuthenticated, user, signUp}}>
       {children}
     </AuthContext.Provider>
   )
