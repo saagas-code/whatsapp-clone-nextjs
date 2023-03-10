@@ -2,6 +2,8 @@ import { MdDonutLarge } from 'react-icons/md';
 import { BsFillChatLeftTextFill } from 'react-icons/bs';
 import { FiMoreVertical } from 'react-icons/fi';
 import { Icon } from '../Icons';
+import { AuthContext } from '@src/contexts/AuthProvider';
+import { useContext } from 'react';
 
 const avatar = "https://www.w3schools.com/howto/img_avatar.png"
 
@@ -10,6 +12,7 @@ interface Props {
 }
 
 export default function Header({setShowNewChat}: Props) {
+  const {user} = useContext(AuthContext)
 
   const OpenNewChat = () => {
     setShowNewChat(true)

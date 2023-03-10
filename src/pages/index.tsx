@@ -50,7 +50,7 @@ export interface Chat {
 export default function Home() {
   const [chatList, setChatList] = useState<Chat[]>(list)
   const [activeChat, setActiveChat] = useState<Chat>();
-  const [showNewChat, setShowNewChat] = useState(true);
+  const [showNewChat, setShowNewChat] = useState(false);
   
   return (
     <div className="flex h-[100vh] bg-[#EDEDED]">
